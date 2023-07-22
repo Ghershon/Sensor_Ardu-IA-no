@@ -1,0 +1,26 @@
+// Definindo os pinos de entrada e saída
+const int pirPin = 2; // Pino conectado ao sensor PIR
+const int relayPin = 3; // Pino conectado ao módulo de relé
+const int ledPin = 4; // Pino conectado à luz
+const int sirenPin = 5; // Pino conectado à sirene
+
+void setup() {
+  pinMode(pirPin, INPUT);
+  pinMode(relayPin, OUTPUT);
+  pinMode(ledPin, OUTPUT);
+  pinMode(sirenPin, OUTPUT);
+}
+
+void loop() {
+  int pirState = digitalRead(pirPin); // Leitura do sensor PIR
+
+  if (pirState == HIGH) { // Se o sensor detectar movimento
+    digitalWrite(ledPin, HIGH); // Acende a luz
+    digitalWrite(relayPin, HIGH); // Ativa o relé (pode ser necessário verificar se o relé é ativo em LOW ou HIGH, dependendo do módulo)
+    digitalWrite(sirenPin, HIGH); // Ativa a sirene
+    delay(5000); // Aguarda por 5 segundos
+    digitalWrite(relayPin, LOW); // Desativa o relé
+    digitalWrite(ledPin, LOW); // Desliga a luz
+    digitalWrite(sirenPin, LOW); // Desativa a sirene
+  }
+}
